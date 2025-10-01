@@ -1,324 +1,874 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Premium Website</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMRD Shirpur - Cloud Development Learning Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    html {
-      scroll-behavior: smooth;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
-    }
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+        }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #111;
-      color: #fff;
-      padding: 1rem 2rem;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-    }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
-    nav .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
+        .college-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    nav ul {
-      display: flex;
-      list-style: none;
-    }
+        .college-name {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            max-width: 200px;
+        }
 
-    nav ul li {
-      margin-left: 2rem;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
 
-    nav ul li a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: #e2e8f0;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-    nav ul li a:hover {
-      color: #00bcd4;
-    }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            transition: width 0.3s ease;
+        }
 
-    .hero {
-      height: 100vh;
-      background: url('https://source.unsplash.com/1600x900/?technology,city') no-repeat center center/cover;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-      padding: 2rem;
-    }
+        .nav-links a:hover {
+            color: #a855f7;
+        }
 
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #00bcd4;
-    }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-    .hero p {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      max-width: 600px;
-    }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
 
-    .section {
-      padding: 5rem 2rem;
-      max-width: 1100px;
-      margin: auto;
-    }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #e2e8f0;
+            transition: all 0.3s ease;
+        }
 
-    .section h2 {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 5%;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
 
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 2rem;
-    }
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
 
-    .feature {
-      flex: 1 1 30%;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      transition: transform 0.3s;
-    }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #6366f1;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s infinite ease-in-out;
+        }
 
-    .feature:hover {
-      transform: translateY(-10px);
-    }
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 25%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 45%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 60%; animation-delay: 1s; }
+        .particle:nth-child(5) { left: 80%; animation-delay: 3s; }
+        .particle:nth-child(6) { left: 90%; animation-delay: 5s; }
 
-    .services, .portfolio, .testimonials {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            max-width: 1000px;
+            animation: fadeInUp 1s ease;
+        }
 
-    .service, .portfolio-item, .testimonial {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    }
+        .institute-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: #a855f7;
+        }
 
-    .portfolio-item img {
-      width: 100%;
-      border-radius: 10px;
-    }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
 
-    .testimonial p {
-      font-style: italic;
-    }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
 
-    .testimonial h4 {
-      margin-top: 1rem;
-      color: #00bcd4;
-    }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
 
-    form input, form textarea {
-      padding: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-family: inherit;
-    }
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
 
-    form button {
-      padding: 1rem;
-      background: #00bcd4;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+        }
 
-    form button:hover {
-      background: #0097a7;
-    }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
 
-    footer {
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 2rem;
-      margin-top: 4rem;
-    }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
 
-    /* Responsive */
-    @media(max-width: 768px) {
-      nav ul {
-        flex-direction: column;
-        background: #222;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        display: none;
-      }
+        /* About Section */
+        .about-section {
+            padding: 5rem 5%;
+            background: #1e293b;
+        }
 
-      nav ul.active {
-        display: flex;
-      }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-      nav .menu-toggle {
-        display: block;
-        cursor: pointer;
-      }
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
 
-      .features {
-        flex-direction: column;
-      }
-    }
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    nav .menu-toggle {
-      display: none;
-      font-size: 1.5rem;
-    }
-  </style>
+        .about-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #a855f7;
+        }
+
+        .about-card p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .about-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .about-card li {
+            padding: 0.5rem 0;
+            color: #cbd5e1;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .about-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+        }
+
+        /* Cloud Topics Section */
+        .topics-section {
+            padding: 5rem 5%;
+            background: #0f172a;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .topic-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .topic-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .topic-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #e2e8f0;
+        }
+
+        .topic-card p {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .topic-tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #a855f7;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Learning Path */
+        .learning-path {
+            padding: 5rem 5%;
+            background: #1e293b;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, #6366f1, #a855f7, #ec4899);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            width: calc(50% - 2rem);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-content:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.05);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #6366f1;
+            border: 4px solid #0f172a;
+            border-radius: 50%;
+            top: 2rem;
+        }
+
+        .timeline-content h3 {
+            color: #a855f7;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            padding: 5rem 5%;
+            background: #0f172a;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .resource-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+        }
+
+        .resource-card h3 {
+            color: #e2e8f0;
+            font-size: 1.3rem;
+        }
+
+        .resource-list {
+            list-style: none;
+        }
+
+        .resource-list li {
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 10px;
+            color: #cbd5e1;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .resource-list li:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateX(5px);
+        }
+
+        /* Contact Form */
+        .contact-section {
+            padding: 5rem 5%;
+            background: #1e293b;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 3rem;
+            border-radius: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #6366f1;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            color: #a855f7;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #94a3b8;
+            line-height: 1.8;
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: #a855f7;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            color: #64748b;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-100px) translateX(50px);
+            }
+            50% {
+                transform: translateY(-200px) translateX(-50px);
+            }
+            75% {
+                transform: translateY(-100px) translateX(50px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: #1e293b;
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s ease;
+                border-top: 1px solid rgba(99, 102, 241, 0.3);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-content {
+                width: calc(100% - 3rem);
+                margin-left: 3rem !important;
+            }
+
+            .timeline-dot {
+                left: 0;
+                transform: translateX(0);
+            }
+
+            .college-name {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="logo-section">
+            <div class="college-logo">IMRD</div>
+            <div class="college-name">Institute of Management Research and Development, Shirpur</div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#topics">Cloud Topics</a></li>
+            <li><a href="#learning">Learning Path</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
 
-  <nav>
-    <div class="logo">MyBrand</div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <ul id="menu">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="hero-content">
+            <div class="institute-badge">🎓 R.C. Patel Educational Trust Initiative</div>
+            <h1>Master Cloud Development at IMRD Shirpur</h1>
+            <p>Learn cutting-edge cloud technologies from AWS, Azure, and Google Cloud. Build scalable applications and become a certified cloud professional at one of Maharashtra's premier institutes.</p>
+            <div class="cta-buttons">
+                <a href="#topics" class="btn btn-primary">Explore Courses</a>
+                <a href="#about" class="btn btn-secondary">About IMRD</a>
+            </div>
+        </div>
+    </section>
 
-  <section class="hero" id="hero">
-    <div>
-      <h1>Welcome to My Premium Website</h1>
-      <p>Experience the power of design and technology combined in one modern, elegant, single-page website.</p>
-    </div>
-  </section>
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <h2 class="section-title">About IMRD Shirpur</h2>
+        <p class="section-subtitle">Excellence in IT and Management Education Since 1997</p>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>🏛️ Our Heritage</h3>
+                <p>Located at the foothills of the Satpura ranges, IMRD is run by the R.C. Patel Educational Trust and has been providing quality education to students from rural and tribal areas for over 25 years.</p>
+            </div>
+            <div class="about-card">
+                <h3>🎯 Our Vision</h3>
+                <p>To develop global perspectives in Information Technology and Management education, nurturing tomorrow's IT professionals with world-class skills and knowledge.</p>
+            </div>
+            <div class="about-card">
+                <h3>📚 Programs Offered</h3>
+                <ul>
+                    <li>BCA (Bachelor of Computer Applications)</li>
+                    <li>MCA (Master of Computer Applications)</li>
+                    <li>MBA/PGDM Programs</li>
+                    <li>BBA (Bachelor of Business Administration)</li>
+                </ul>
+            </div>
+            <div class="about-card">
+                <h3>🌟 Why Choose IMRD?</h3>
+                <ul>
+                    <li>State-of-the-art infrastructure</li>
+                    <li>Well-stocked library resources</li>
+                    <li>Experienced faculty members</li>
+                    <li>Industry-relevant curriculum</li>
+                    <li>Focus on practical learning</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-  <section class="section" id="about">
-    <h2>About Us</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis, purus a porttitor fermentum, neque orci cursus nulla, sed aliquet nisl elit a justo. Sed vulputate sem ut mi volutpat.</p>
-  </section>
+    <!-- Cloud Topics Section -->
+    <section class="topics-section" id="topics">
+        <h2 class="section-title">Cloud Development Topics</h2>
+        <p class="section-subtitle">Comprehensive curriculum covering all major cloud platforms</p>
+        <div class="topics-grid">
+            <div class="topic-card">
+                <div class="topic-icon">☁️</div>
+                <h3>Cloud Fundamentals</h3>
+                <p>Understanding cloud computing basics, service models (IaaS, PaaS, SaaS), deployment models, and cloud architecture principles.</p>
+                <span class="topic-tag">Beginner</span>
+                <span class="topic-tag">4 weeks</span>
+            </div>
+            <div class="topic-card">
+                <div class="topic-icon">🔶</div>
+                <h3>Amazon Web Services (AWS)</h3>
+                <p>Master EC2, S3, Lambda, RDS, CloudFormation, and prepare for AWS certification exams with hands-on projects.</p>
+                <span class="topic-tag">Intermediate</span>
+                <span class="topic-tag">8 weeks</span>
+            </div>
+            <div class="topic-card">
+                <div class="topic-icon">🔷</div>
+                <h3>Microsoft Azure</h3>
+                <p>Learn Azure Virtual Machines, App Services, Azure Functions, Cosmos DB, and DevOps with Azure pipelines.</p>
+                <span class="topic-tag">Intermediate</span>
+                <span class="topic-tag">8 weeks</span>
+            </div>
+            <div class="topic-card">
+                <div class="topic-icon">🔴</div>
+                <h3>Google Cloud Platform (GCP)</h3>
+                <p>Explore Compute Engine, Cloud Storage, BigQuery, Kubernetes Engine, and machine learning on GCP.</p>
+                <span class="topic-tag">Intermediate</span>
+                <span class="topic-tag">6 weeks</span>
+            </div>
+            <div class="topic-card">
+                <div class="topic-icon">🐳</div>
+                <h3>Docker & Kubernetes</h3>
+                <p>Containerization with Docker, orchestration with Kubernetes, microservices architecture, and CI/CD pipelines.</p>
+                <span class="topic-tag">Advanced</span>
+                <span class="topic-tag">6 weeks</span>
+            </div>
+            <div class="topic-card">
+                <div class="topic-icon">🔐</div>
+                <h3>Cloud Security</h3>
+                <p>Identity and access management, encryption, security best practices, compliance, and threat protection.</p>
+                <span class="topic-tag">Advanced</span>
+                <span class="topic-tag">4 weeks</span>
+            </div>
+            <div class="topic-card">
+                <div class="topic-icon">⚙️</div>
+                <h3>DevOps & Automation</h3>
+                <p>Infrastructure as Code, Terraform, Ansible, Jenkins, GitLab CI/CD, and monitoring with Prometheus.</p>
+                <span class="topic-tag">Advanced</span>
+                <span class="topic-tag">8 weeks</span>
+            </div>
+            <div class="topic-card">
+                <div class="topic-icon">📊</div>
+                <h3>Cloud Data Engineering</h3>
+                <p>Big data on cloud, data lakes, ETL pipelines, Apache Spark, and real-time data processing.</p>
+                <span class="topic-tag">Advanced</span>
+                <span class="topic-tag">6 weeks</span>
+            </div>
+            <div class="topic-card">
+                <div class="topic-icon">🤖</div>
+                <h3>Serverless Architecture</h3>
+                <p>Building serverless applications, event-driven architecture, AWS Lambda, Azure Functions, and cost optimization.</p>
+                <span class="topic-tag">Intermediate</span>
+                <span class="topic-tag">4 weeks</span>
+            </div>
+        </div>
+    </section>
 
-  <section class="section" id="features">
-    <h2>Features</h2>
-    <div class="features">
-      <div class="feature">
-        <h3>Responsive Design</h3>
-        <p>Looks great on all devices – from mobile to desktop.</p>
-      </div>
-      <div class="feature">
-        <h3>Fast Performance</h3>
-        <p>Optimized loading and smooth animations for better UX.</p>
-      </div>
-      <div class="feature">
-        <h3>Modern Tech</h3>
-        <p>Built with the latest web standards and best practices.</p>
-      </div>
-    </div>
-  </section>
+    <!-- Learning Path -->
+    <section class="learning-path" id="learning">
+        <h2 class="section-title">Your Learning Journey</h2>
+        <p class="section-subtitle">Structured path from beginner to cloud expert</p>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Phase 1: Foundation</h3>
+                    <p>Learn cloud fundamentals, networking basics, Linux administration, and programming fundamentals (Python/JavaScript).</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Phase 2: Cloud Platforms</h3>
+                    <p>Deep dive into AWS, Azure, or GCP. Understand core services, compute, storage, databases, and networking.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Phase 3: Containerization</h3>
+                    <p>Master Docker containers, create images, manage registries, and understand microservices architecture.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Phase 4: Orchestration</h3>
+                    <p>Learn Kubernetes for container orchestration, deployments, services, scaling, and cluster management.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Phase 5: DevOps & CI/CD</h3>
+                    <p>Implement Infrastructure as Code, automated testing, continuous integration and deployment pipelines.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Phase 6: Specialization</h3>
+                    <p>Choose your path: Cloud Security, Data Engineering, Machine Learning, or Serverless Architecture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section class="section" id="services">
-    <h2>Services</h2>
-    <div class="services">
-      <div class="service">
-        <h3>Web Development</h3>
-        <p>We create responsive, fast-loading websites tailored to your business goals.</p>
-      </div>
-      <div class="service">
-        <h3>UI/UX Design</h3>
-        <p>Clean, modern interfaces that enhance user engagement and satisfaction.</p>
-      </div>
-      <div class="service">
-        <h3>SEO Optimization</h3>
-        <p>Improve your search engine rankings with our proven techniques.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="portfolio">
-    <h2>Portfolio</h2>
-    <div class="portfolio">
-      <div class="portfolio-item"><img src="https://source.unsplash.com/400x300/?web" alt="Project 1" /></div>
-      <div class="portfolio-item"><img src="https://source.unsplash.com/400x300/?design" alt="Project 2" /></div>
-      <div class="portfolio-item"><img src="https://source.unsplash.com/400x300/?startup" alt="Project 3" /></div>
-    </div>
-  </section>
-
-  <section class="section" id="testimonials">
-    <h2>What Clients Say</h2>
-    <div class="testimonials">
-      <div class="testimonial">
-        <p>"Absolutely amazing service. Our website traffic doubled!"</p>
-        <h4>– Sarah K.</h4>
-      </div>
-      <div class="testimonial">
-        <p>"Top-notch design. They understood our vision perfectly."</p>
-        <h4>– James P.</h4>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="contact">
-    <h2>Contact Us</h2>
-    <form onsubmit="submitForm(event)">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 MyBrand. All rights reserved.</p>
-  </footer>
-
-  <script>
-    function toggleMenu() {
-      document.getElementById('menu').classList.toggle('active');
-    }
-
-    function submitForm(e) {
-      e.preventDefault();
-      alert('Message submitted! Thank you.');
-    }
-  </script>
-</body>
-</html>
-
+    <!-- Resources Section -->
+    <section class="resources-section" id="resources">
+        <h2 class="section-title">Learning Resources</h2>
+        <p class="section-subtitle">Everything you need to succeed in cloud development</p>
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-header">
+                    <div class="resource-icon">📖</div>
+                    <h3>Documentation</h3>
+                </div>
+                <ul class="resource-list">
+                    <li>AWS Official Documentation</li>
+                    <li
